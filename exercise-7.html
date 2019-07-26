@@ -8,13 +8,52 @@
     /*
     Make a Todo List
 
-    0. Make it so that after entering the task description, in the text field and clicking the "Add Task" button, a new task appears inside the element with the id todo-list.
+    0. Make it so that after entering the task description, 
+    in the text field and clicking the "Add Task" button, 
+    a new task appears inside the element with the id todo-list.
     1. the ability to remove tasks (add an x button)
     2. the ability to check off tasks - strikes them out wo removing (add a checkbox)
-    3. the ability to delete a task
-    4. the ability to edit an existing task
+    3. the ability to edit an existing task
 
     */
+    $(function() {
+      $('#add-button').on('click', () => {
+        let $li = $('<li>');
+        $li.text($("#description").val());
+        $('#todo-list').append($li)
+        $("#description").val("")
+
+      let $deleteButton = $('<button>');
+      $li.append($deleteButton.text('X'))
+
+      let $checkButton = $('<button>');
+      $li.append($checkButton.html("&#10004"))
+
+      $deleteButton.on('click', (e)=> {
+        e.target.parentNode.remove()
+        })
+      $checkButton.on('click', (e) => {
+        console.log(e.target.parentNode.style.textDecoration )
+        let decorate = e.target.parentNode.style.textDecoration;
+        e.target.parentNode.style.textDecoration = decorate ? '' : 'line-through'
+        })
+
+      $li.on('click', ({target}) => {
+        // console.log(element.target)
+        console.log(target.getAttribute("contentEditable"))
+        target.setAttribute("contentEditable", "true")
+        console.log(target.getAttribute("contentEditable"))
+        })
+      // (e.target).toggleAttribute("contenteditable", "true")})
+
+      })
+    })
+    // $('ul').on('click', (e) => {
+
+  
+      // $('deleteButton').on('click', ()=> {
+      //   })
+
     </script>
     <style>
     #wrapper {
